@@ -29,7 +29,8 @@ contract Seeds {
         owner = msg.sender;
         token = IERC20(_tokenAddress);
     }
-    function give_role(address _address){
+    function give_role(address _address) onlyOwner() external{
+        
         
     }
     struct Seed {
