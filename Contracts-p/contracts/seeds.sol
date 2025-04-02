@@ -95,7 +95,7 @@ contract harvests {
     uint256 cost = price * _quantity;
     require(token.transferFrom(msg.sender, payable(address(liquidp)), cost), "Transfer failed.");
     harvest.quantity -= _quantity;
-    harvest.buyValue += cost; // Assuming `value` represents the total purchased value
+    harvest.buyValue += cost; 
   }
 
  function sellharvest(uint256 _harvestId, uint256 _quantity) public {
@@ -103,18 +103,11 @@ contract harvests {
     harvest storage harvest = harvests[_harvestId];
     require(harvest.quantity >= _quantity, "Not enough harvest to sell.");
 
-  // Calculate total selling price
     uint256 sellingPrice = _quantity * price;
 
-  // Update harvest quantity
     harvest.quantity -= _quantity;
 
-  // Transfer funds from buyer to liquidity pool
     require(token.transferFrom(msg.sender, payable(address(liquidp)), sellingPrice), "Transfer failed.");
-
-  // Consider emitting an event to notify of a harvest sale
-  // event HarvestSold(uint256 harvestId, uint256 quantity, uint256 price);
-  // emit HarvestSold(_harvestId, _quantity, sellingPrice);
 }
 
 }
